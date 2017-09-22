@@ -14,9 +14,41 @@ app.use(express.static(path.join(__dirname, 'static')));
 // using the body parser module
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(ejsLayouts);
-app.set('view engine', 'ejs');
 
+app.set('view engine', 'ejs');
+app.use(ejsLayouts);
+
+app.get("/", function(req, res){
+  res.render("./games/index");///index goes here
+})
+
+app.get("/games", function(req, res){
+  res.render("./games/index");
+})
+
+app.get("/games/new", function(req, res){
+  res.render("./games/new");
+})
+
+app.get("/games/:names", function(req, res){
+  res.render("./games/show");
+})
+
+app.get("/games/:names/edit", function(req, res){
+  res.render("./games/edit");
+})
+
+app.put("/games/:name", function(req, res){
+  res.render("update a specific game"); //should use ajax
+})
+
+app.post("/games", function(req, res){
+  res.render("./games/create");
+})
+
+app.delete("/games/:name", function(req, res){
+  res.send("deletes a specific game"); //should use ajax
+})
 // your routes here
 
 // ...
