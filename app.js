@@ -17,18 +17,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
 
-// your routes here
-
-// ...
-
-// helper functions
-
-// Read list of games from file.
 function getGames() {
     var fileContents = fs.readFileSync('./games.json'); // :'(
     var games = JSON.parse(fileContents);
     return games;
 }
+
+var games = getGames();
+
+// your routes here
+//pass data to template res.render
+app.get('/', function(req, res) {
+  res.render('layout', {games: games});
+});
+
+app.delete('/games/:name', function(req, res) {
+  var gameToDelete = req.params.name;
+  games = games.filter(function(element){
+    return element.name !== gameToDelete;
+  })
+});
+
+
+
+// helper functions
+
+// Read list of games from file.
+
 
 // Write list of games to file.
 function saveGames(games) {
