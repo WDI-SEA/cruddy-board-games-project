@@ -1,14 +1,46 @@
 body {
-  background: url('/img/background.jpg') no-repeat center center fixed;
+  background: url('/img/background.jpg') no-repeat center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-div {
-  background-color: white;
+body * {
+  font-family: sans-serif;
+}
+
+div:not(.navbar) {
+  background-color: #062F4F;
+  color: white;
   border: solid black 1px;
+  border-radius: 5px;
   margin: 1em;
   padding: 1em;
+}
+
+div.navbar {
+  padding: 1em;
+  border-radius: 0;
+}
+
+div.gamecard, div.form-group {
+  background-color: #B82601;
+  color: #E0F4FF;
+}
+
+a.menu {
+  margin: 0 1em;
+  color: white;
+}
+
+a.active {
+  color: rgba(0,0,0,.1);
+}
+
+.btn-space {
+    margin-right: 5px;
+}
+div.form-control {
+  display: block;
 }
