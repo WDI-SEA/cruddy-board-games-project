@@ -16,10 +16,12 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "body-parser": "^1.15.2",
-        "ejs": "^2.5.5",
-        "express": "^4.14.0",
+        "body-parser": "^1.18.1",
+        "dotenv": "^4.0.0",
+        "ejs": "^2.5.7",
+        "express": "^4.15.4",
         "express-ejs-layouts": "^2.2.0",
-        "fs": "0.0.1-security"
+        "fs": "0.0.1-security",
+        "geocode": "0.0.3"
     }
 }
