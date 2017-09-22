@@ -6,14 +6,15 @@ console.log("JS good to go, sir!");
 
 //DELETE AJAX
 $('.delete').on('click', function(e) {
+  e.preventDefault();
   var toDelete = $(this);
   var deleteUrl = toDelete.attr('href');
   $.ajax({
     method: 'DELETE',
     url: deleteUrl
-  }).done(function(data){
+  }).done(function(data) {
     console.log(data);
-    res.redirect('/');
+    window.location = '/';
   });
 });
 
@@ -24,3 +25,18 @@ $('.delete').on('click', function(e) {
 
 
 //PUT AJAX
+
+$('.put-form').on('submit', function(e) {
+  e.preventDefault();
+  var updateElement = $(this);
+  var updateUrl = updateElement.attr('action');
+  var updatedData = updateElement.serialize();
+  $.ajax({
+    method: 'PUT',
+    url: updateUrl,
+    data: updatedData
+  }).done(function(data) {
+      console.log(data);
+      window.location = url;
+  });
+});

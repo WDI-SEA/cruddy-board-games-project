@@ -1,9 +1,10 @@
 <div>
-  <a href="/games">Home</a>
+  <h2><%= game.name %></h2>
 </div>
 <div>
-  <h2><% game.name %></h2>
+  <p><%= game.description %></p>
 </div>
 <div>
-  <p><% game.descritpion %></p>
+  <a href="/games/<%= game.id %>/edit">Edit</a>
+  <a href="/games/<%= game.id %>/delete" class="delete">Delete<a/>
 </div>

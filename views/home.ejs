@@ -1,19 +1,17 @@
 <div>
-  <a href="/games">Home</a>
-  <a href="/games/new">Add Game</a>
-</div>
-<div>
   <h1>The Best Boardgames Ever</h1>
   <h4>Here is a list of some great games that you should play.</h4>
 </div>
 <div>
   <ul>
     <% for (var i = 0; i < games.length; i++) { %>
+      <% if (games[i]) { %>
       <li>
-        <a href="games/<%= i %>/edit">Edit</a>
-        <a href="games/<%= i %>/delete" class="delete">Delete</a>
-        <a href="games/<%= i %>"><%= games[i].name %></a>
+        <a href="/games/<%= i %>/edit">Edit</a>
+        <a href="/games/<%= i %>/delete" class="delete">Delete</a>
+        <a href="/games/<%= i %>"><%= games[i].name %></a>
       </li>
+      <% } %>
     <% } %>
   </ul>
 </div>
