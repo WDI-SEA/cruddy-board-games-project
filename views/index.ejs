@@ -1,0 +1,18 @@
+<div>
+	<h1>Evan's Favorite Board Games</h1>
+	<h4>Here's a list of my favorite board games!</h4>
+</div>
+
+<div>
+	<ul>
+		<% for (var i = 0; i < games.length; i++) { %>
+			<% if (games[i]) { %>
+				<li>
+					<a href="/games/<%= i %>"><%= games[i].name %></a>
+					<a href="/games/<%= i %>/edit">(Edit)</a>
+					<a class="delete-link" href="/games/<%= i %>">(Delete)</a>
+				</li>
+			<% } %>
+		<% } %>
+	</ul>
+</div>

@@ -17,11 +17,44 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
 
-// your routes here
+app.get('/', function(req, res) {
+	res.render('index', {games: getGames() });
+})
 
-// ...
+app.get('/games/new', function(req, res) {
+	res.render('newgame');
+})
 
-// helper functions
+app.post('/games', function(req, res) {
+	var games = getGames();
+	games.push(req.body);
+	saveGames(games);
+	res.redirect('/');
+})
+
+app.get('/games/:id', function(req, res) {
+	var game = getGames()[req.params.id];
+	game.id = req.params.id;
+	res.render('show', {game: game});
+})
+
+app.get('/games/:id/edit', function(req, res) {
+	var game = getGames()[req.params.id];
+	game.id = req.params.id;
+	res.render('editgame', {game: game});
+})
+
+app.put('/games/:id', function(req, res) {
+	var games = getGames();
+	games[req.params.id] = req.body;
+	saveGames(games);
+})
+
+app.delete('/games/:id', function(req, res) {
+	var games = getGames();
+	games[req.params.id] = undefined;
+	saveGames(games);
+})
 
 // Read list of games from file.
 function getGames() {
