@@ -1,0 +1,26 @@
+extends ./layout
+
+block content
+  div
+    h1 My List of Games
+    ul
+    each game in games
+      -if (game !== null) {
+        div.gamecard 
+          h3= game.name
+          p= game.description
+          a(href='/games/'+game.name+'/edit'): button.btn.btn-space.btn-warning#edit Edit
+          button.btn.btn-space.btn-danger#delete(href='/games/'+game.name) Delete
+      - }
+    script.
+      $('#delete').on('click', function(e) {
+        e.preventDefault();
+        var deleteUrl = $(this).attr('href');
+        $.ajax({
+          method: 'DELETE',
+          url: deleteUrl
+        }).done(function(data) {
+          // get data returned from the DELETE route
+          console.log(data);
+        });
+      });
