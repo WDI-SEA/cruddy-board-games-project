@@ -10,17 +10,17 @@ block content
           h3= game.name
           p= game.description
           a(href='/games/'+game.name+'/edit'): button.btn.btn-space.btn-warning#edit Edit
-          button.btn.btn-space.btn-danger#delete Delete
+          button.btn.btn-space.btn-danger#delete(href='/games/'+game.name) Delete
       - }
     script.
       $('#delete').on('click', function(e) {
         e.preventDefault();
-        var query = $('input').val();
-        $.delete('/search/one/' + query).done(function(data) {
-          if ($('div').children().length === 0) {
-            $('div').append(data);
-          } else if ($('div').children().length > 0) {
-            $('div').empty().append(data);
-          }
+        var deleteUrl = $(this).attr('href');
+        $.ajax({
+          method: 'DELETE',
+          url: deleteUrl
+        }).done(function(data) {
+          // get data returned from the DELETE route
+          console.log(data);
         });
       });

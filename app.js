@@ -70,23 +70,25 @@ app.get('/games/:name/edit', function(req, res) {
 app.put('/games/:name', function(req, res) {
   var games = JSON.parse(fs.readFileSync('./games.json'));
   games.forEach(function(game) {
-    if (game !== null && game.name === req.params.name) {
+    if (game.name === req.params.name) {
       console.log(game.name);
       game.name = req.body.name;
       game.description = req.body.description;
     }
   });
   saveGames(games);
-  res.redirect(303, '/games');
+  req.method = 'GET';
+  res.redirect('/games');
 });
 
 app.delete('/games/:name', function(req, res) {
   var games = JSON.parse(fs.readFileSync('./games.json'));
   games = games.filter(function(game, index) {
-    return (game.name !== req.params.name)
+    return (game !== null && game.name !== req.params.name)
   })
   saveGames(games);
-  res.render('index', {games: games})
+  req.method = 'GET'
+  res.redirect('/games');
 });
 
 app.get('*', function(req, res) {
@@ -106,6 +108,8 @@ function getGames() {
 function saveGames(games) {
     fs.writeFileSync('./games.json', JSON.stringify(games));
 }
+
+function filterNull(
 
 // start the server
 
