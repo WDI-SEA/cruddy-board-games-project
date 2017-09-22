@@ -1,5 +1,4 @@
 // require the modules we need
-// STOP: what are these modules? Use online documentation to read up on them.
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
@@ -19,7 +18,27 @@ app.set('view engine', 'ejs');
 
 // your routes here
 
-// ...
+//HOME
+app.get('/games', function(req,res) {
+  res.render('home', {games: getGames()});
+});
+
+//DETAILS
+app.get('/games/:name', function(req, res) {
+  res.render('details-game', {NOT SURE})
+});
+
+//NEW
+app.get('/games/new', function(req,res) {
+  res.render('create-game', {NOT SURE});
+});
+
+//EDIT
+
+
+//DELETE
+
+
 
 // helper functions
 
@@ -28,15 +47,15 @@ function getGames() {
     var fileContents = fs.readFileSync('./games.json'); // :'(
     var games = JSON.parse(fileContents);
     return games;
-}
+};
 
 // Write list of games to file.
 function saveGames(games) {
     fs.writeFileSync('./games.json', JSON.stringify(games));
-}
+};
+
 
 // start the server
-
 var port = 3000;
 console.log("http://localhost:" + port);
 app.listen(port);
