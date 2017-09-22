@@ -21,22 +21,22 @@ app.get('/', function(req, res){ //homepage
 
 });
 
+app.get('/games/new/', function(req, res) { //add new game
+  res.render('./games-new');
+})
+
 app.get('/games/:id', function(req, res) { //individual game info
   var game = getGames()[req.params.id];
   game.id = req.params.id;
   res.render('games', {game: game}); //might not need ./
 });
 
-app.get('/games/new/', function(req, res) { //add new game
-  res.render('./games-new'); //might not need the game: game
-})
-
 app.post('/games', function(req, res) { //post NEW GAME info to list on
   var game = getGames();
   game.push(req.body);
-  saveGames(games);
+  saveGames(game);
 
-  var path = '/games/' + (games.length - 1);
+  var path = '/games/' + (game.length - 1);
   res.redirect(path);
 })
 
@@ -50,6 +50,7 @@ app.put('/games/:id', function(req, res) { //put game EDIT information
     var game = getGames();
     game[req.params.id] = req.body;
     saveGames(game);
+    console.log(req.body);
     res.send(req.body);
 });
 
