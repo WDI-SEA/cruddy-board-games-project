@@ -1,4 +1,4 @@
-/ require the modules we need
+// require the modules we need
 // STOP: what are these modules? Use online documentation to read up on them.
 var express = require('express');
 var path = require('path');
@@ -19,21 +19,21 @@ app.set('view engine', 'ejs');
 
 // your routes here
 app.get('/', function(req, res){
-	res.render('main', { games: getGames() });
+	res.render('home', { games: getGames() });
 });
 // ...
 
 // helper functions
 // new
 app.get('/boardgames/new', function(req, res) {
-    res.render('game-create');
+    res.render('boardgames-create');
 });
 
 // show
 app.get('/game/:id', function(req, res) {
     var game = getGames()[req.params.id];
     game.id = req.params.id;
-    res.render('game-detail', { game: game });
+    res.render('boardgames-detail', { game: game });
 });
 
 // post
@@ -50,7 +50,7 @@ app.post('/game', function(req, res) {
 app.get('/boardgames/:id/edit', function(req, res) {
     var game = getGames()[req.params.id];
     game.id = req.params.id;
-    res.render('game-edit', { game: game });
+    res.render('boardgames-edit', { game: game });
 });
 
 // update
