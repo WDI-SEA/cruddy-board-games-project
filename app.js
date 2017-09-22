@@ -3,7 +3,7 @@
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
-var ejsLayouts = require("express-ejs-layouts");
+// var ejsLayouts = require("express-ejs-layouts");
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -14,12 +14,17 @@ app.use(express.static(path.join(__dirname, 'static')));
 // using the body parser module
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(ejsLayouts);
-app.set('view engine', 'ejs');
+// app.use(ejsLayouts);
+app.set('view engine', 'pug');
+app.set('view options', {
+  layout: false // pug has default layout functionality
+});
 
 // your routes here
 
-// ...
+app.get('/', function(req, res) {
+  res.render('index');
+});
 
 // helper functions
 
