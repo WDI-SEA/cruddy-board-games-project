@@ -1,0 +1,28 @@
+extends ./layout
+
+block content
+  div
+    h1= game.name
+    h2 Edit
+    form(action='/games/'+game.name)
+      div.form-group
+        label(for='name') Name
+        input.form-control(type='text' name='name' value=game.name)
+      div.form-group
+        label(for='description') Description
+        input.form-control(type='textarea' name='description' value=game.description)
+      button.btn.btn-primary#update Submit
+      
+  script.
+    $('#update').on('click', function(e) {
+      e.preventDefault();
+      var updateUrl = $(this).parent().attr('action');
+      var gameData = $(this).parent().serialize();
+      $.ajax({
+        method: 'PUT',
+        url: updateUrl,
+        data: gameData
+      }).done(function(data) {
+        $.get('/games/'+game.name);
+      });
+    });

@@ -23,7 +23,74 @@ app.set('view options', {
 // your routes here
 
 app.get('/', function(req, res) {
-  res.render('index');
+  res.redirect('/games');
+});
+
+app.get('/games', function(req, res) {
+  var games = fs.readFileSync('./games.json');
+  var games = JSON.parse(games);
+  res.render('index', {games: games});
+});
+
+app.get('/games/new', function(req, res) {
+  res.render('new');
+});
+
+app.post('/games', function(req, res) {
+  var games = JSON.parse(fs.readFileSync('./games.json'));
+  var game = {
+    name: req.body.name,
+    description: req.body.description
+  };
+  games.push(game);
+  console.log(games);
+  saveGames(games);
+  res.render('index', {games: games})
+});
+
+app.get('/games/:name', function(req, res) {
+  res.render('show', req.params.name)
+});
+
+app.get('/games/:name/edit', function(req, res) {
+  var games = JSON.parse(fs.readFileSync('./games.json'));
+  var returnGame;
+  games.forEach(function(game) {
+    if (game !== null && game.name === req.params.name) {
+      returnGame = game;
+    }
+  });
+  if (returnGame !== undefined) {
+    res.render('edit', {game: returnGame});
+  } else {
+    res.render('index', {games: games});
+  }
+});
+
+app.put('/games/:name', function(req, res) {
+  var games = JSON.parse(fs.readFileSync('./games.json'));
+  games.forEach(function(game) {
+    if (game !== null && game.name === req.params.name) {
+      console.log(game.name);
+      game.name = req.body.name;
+      game.description = req.body.description;
+    }
+  });
+  saveGames(games);
+  res.redirect(303, '/games');
+});
+
+app.delete('/games/:name', function(req, res) {
+  var games = JSON.parse(fs.readFileSync('./games.json'));
+  games = games.filter(function(game, index) {
+    return (game.name !== req.params.name)
+  })
+  saveGames(games);
+  res.render('index', {games: games})
+});
+
+app.get('*', function(req, res) {
+  res.redirect('/games');
 });
 
 // helper functions

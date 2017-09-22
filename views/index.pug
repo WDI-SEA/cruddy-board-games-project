@@ -1,4 +1,26 @@
 extends ./layout
 
 block content
-  h1 File Upload
+  div
+    h1 My List of Games
+    ul
+    each game in games
+      -if (game !== null) {
+        div.gamecard 
+          h3= game.name
+          p= game.description
+          a(href='/games/'+game.name+'/edit'): button.btn.btn-space.btn-warning#edit Edit
+          button.btn.btn-space.btn-danger#delete Delete
+      - }
+    script.
+      $('#delete').on('click', function(e) {
+        e.preventDefault();
+        var query = $('input').val();
+        $.delete('/search/one/' + query).done(function(data) {
+          if ($('div').children().length === 0) {
+            $('div').append(data);
+          } else if ($('div').children().length > 0) {
+            $('div').empty().append(data);
+          }
+        });
+      });
