@@ -109,7 +109,8 @@ function saveGames(games) {
     fs.writeFileSync('./games.json', JSON.stringify(games));
 }
 
-function filterNull(
+// remove null entries from db
+function filterNull(){};
 
 // start the server
 
