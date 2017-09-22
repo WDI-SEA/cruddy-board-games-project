@@ -1,5 +1,3 @@
-// require the modules we need
-// STOP: what are these modules? Use online documentation to read up on them.
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
@@ -17,9 +15,48 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
 
-// your routes here
+app.get('/', function(req, res) {
+  res.render('index', { games: getGames() });
+});
 
-// ...
+app.get('/games/new', function(req, res){
+  res.render('newGame');
+});
+
+app.get('/games/:id', function(req, res) {
+    var game = getGames()[req.params.id];
+    game.id = req.params.id;
+    res.render('detailGame', { game: game });
+});
+
+app.get('/games/:id/:edit', function(req, res){
+  var game = getGames()[req.params.id];
+    game.id = req.params.id;
+    res.render('editGame', { game: game });
+});
+
+app.post('/games', function(req, res) {
+    var games = getGames();
+    games.push(req.body);
+    saveGames(games);
+    var path = '/games/' + (games.length - 1);
+    res.redirect(path);
+});
+
+app.put('/games/:id', function(req, res) {
+    var games = getGames();
+    games[req.params.id] = req.body;
+    saveGames(games);
+    res.send(req.body);
+});
+
+app.delete('/games/:id', function(req, res) {
+    var games = getGames();
+    console.log('working');
+   games[req.params.id] = undefined;
+    saveGames(games);
+    res.send(req.body);
+});
 
 // helper functions
 

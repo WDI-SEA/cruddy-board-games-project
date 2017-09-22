@@ -1,0 +1,48 @@
+<div>
+  <h1>My Games</h1>
+</div>
+<div>
+  <ul>
+    <% for (var i = 0; i < games.length; i++) { %>
+      <% if (games[i]) { %>
+        <li>
+          <a href="/games/<%=i%>/edit">edit</a>
+          <a class="delete-link" href="/games/<%=i%>">delete</a>
+          <a href="/games/<%=i%>"><%= games[i].name %></a>
+        </li>
+      <% } %>
+    <% } %>
+  </ul>
+  </div>
+<script>
+$('.delete-link').on('click', function(e) {
+    e.preventDefault();
+    console.log('clicked');
+    var element = $(this);
+    var url = element.attr('href');
+    $.ajax({
+        method: 'DELETE',
+        url: url
+    }).done(function(data) {
+      console.log(data);
+        window.location = '/';
+    });
+});
+
+$('.put-form').on('submit', function(e) {
+    e.preventDefault();
+    var element = $(this);
+    var url = element.attr('action');
+    var formData = element.serialize();
+    $.ajax({
+        method: 'PUT',
+        url: url,
+        data: formData
+    }).done(function(data) {
+      console.log(data);
+        window.location = url;
+    });
+});
+
+
+</script>

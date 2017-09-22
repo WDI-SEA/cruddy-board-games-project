@@ -1,0 +1,7 @@
+<div>
+  <form action="/games/<%= game.id %>" method="PUT" class="put-form">
+     <input type="text" name="name" value="<%= game.name %>" placeholder="name">
+     <textarea name="description"><%= game.description %></textarea>
+    <button type="submit">Save</button>
+  </form>
+</div>
