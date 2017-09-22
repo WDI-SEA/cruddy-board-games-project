@@ -8,7 +8,7 @@
       <% if (games[i]) { %>
       <li>
         <a href="/games/<%= i %>/edit">Edit</a>
-        <a href="/games/<%= i %>/delete" class="delete">Delete</a>
+        <a href="/games/<%= i %>" class="delete">Delete</a>
         <a href="/games/<%= i %>"><%= games[i].name %></a>
       </li>
       <% } %>

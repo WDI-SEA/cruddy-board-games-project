@@ -49,6 +49,7 @@ app.get('/games/new', function(req,res) {
 //DETAILS
 app.get('/games/:id', function(req, res) {
   //I could not figure this part out without the help of the complete file
+  console.log('im in get games/:id' + req.params.id);
   var game = getGames()[req.params.id];
   game.id = req.params.id;
   res.render('details-game', { game: game });
@@ -65,6 +66,7 @@ app.post('/games', function(req,res) {
   //to strinify games for storage as json
   var path = '/games/' +(games.length -1);
   res.redirect(path);
+  //takes us back to games
 });
 
 
@@ -80,7 +82,6 @@ app.get('/games/:id/edit', function(req,res) {
 app.put('/games/:id', function(req,res) {
   console.log("body:", req.body);
   var games = getGames();
-
   games[req.params.id] = req.body;
   saveGames(games);
   res.send(req.body);
@@ -89,9 +90,10 @@ app.put('/games/:id', function(req,res) {
 
 //DELETE
 app.delete('/games/:id', function(req,res) {
+  console.log("im in the route" + id);
   var games = getGames();
 // could not figure this out without looking at the complete file
-  games[req.params.id] = undefined;
+  //games[req.params.id] = undefined;
   saveGames(games);
   res.send(req.body);
 });
