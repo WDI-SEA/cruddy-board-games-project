@@ -17,6 +17,44 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
 
+app.get('/', function(req, res) {
+	res.render('home');
+});
+
+app.get('/games', function(req, res) {
+    res.render('/games');
+});
+
+app.get('/games/new', function(req, res) {
+	res.render('/games/new');
+});
+ 
+app.get('/games/:name', function(req, res) {
+	res.render('/games/:name');
+});
+
+app.get('/games/:name/edit', function(req, res) {
+	res.render('/games/:name/edit');
+});
+
+app.post('/games', function(req, res) {
+
+});
+
+app.put('/games/:name', function(req, res) {
+
+});
+
+app.delete('/games/:name', function(req, res){
+    var games = getGames();
+
+    games[req.params.id] = undefined;
+    saveGames(games);
+
+    res.send(req.body);
+});
+
+
 // your routes here
 
 // ...
