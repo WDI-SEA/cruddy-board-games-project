@@ -1,7 +1,15 @@
 <h1> "Display a list to the games" </h1>
 
-<ul>
-  <li><a href="#">edit  </a><a href="#">delete  </a>Settlers of Catan</li>
-  <li><a href="#">edit  </a><a href="#">delete  </a>Risk</li>
-  <li><a href="#">edit  </a><a href="#">delete  </a>Stratego</li>
-</ul>
+<div>
+  <ul>
+    <% for (var i=0; i < games.length; i++) { %>
+      <% if (games[i]) { %>
+        <li>
+          <a href="/games/<%=i %>"><%= games[i].name %></a>
+          <a href="/games/<%=i %>/edit">Edit</a>
+          <a class="delete-link" href="/games/<%= i %>">Delete</a>
+        </li>
+      <% } %>
+    <% } %>
+  </ul>
+</div>

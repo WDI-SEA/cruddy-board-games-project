@@ -1,1 +1,6 @@
-<h1>"display a specific game"</h1>
+<div>
+  <h1> <%= game.name %></h1>
+  <p> <%= game.description%> </p>
+  <a href="/games/<%= game.id %>/edit">Edit</a>
+  <a class="delete-link" href="/games/ <%= game.id %>">Delete</a>
+</div>

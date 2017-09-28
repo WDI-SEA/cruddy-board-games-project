@@ -19,35 +19,42 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 
 app.get("/", function(req, res){
-  res.render("./games/index");///index goes here
-})
-
-app.get("/games", function(req, res){
-  res.render("./games/index");
+  res.render("./games/index", {games: getGames()});///index goes here
 })
 
 app.get("/games/new", function(req, res){
   res.render("./games/new");
 })
 
-app.get("/games/:names", function(req, res){
-  res.render("./games/show");
+app.get("/games/:id", function(req, res){
+  var game = getGames()[req.params.id];
+  game.id = req.params.id;
+  res.render("show", {game: game});
 })
 
-app.get("/games/:names/edit", function(req, res){
-  res.render("./games/edit");
+app.get("/games/:id/edit", function(req, res){
+  var game = getGames()[req.params.id];
+  game.id = req.params.id;
+  res.render("edit", {game: game})
 })
 
-app.put("/games/:name", function(req, res){
-  res.render("update a specific game"); //should use ajax
+app.put("/games/:id", function(req, res){
+  var games = getGames();
+  games[req.params.id] = req.body;
+  saveGames(games);
 })
 
 app.post("/games", function(req, res){
-  res.render("./games/create");
+  var games = getGames();
+  games.push(req.body);
+  saveGames(games);
+  res.redirect("/");
 })
 
-app.delete("/games/:name", function(req, res){
-  res.send("deletes a specific game"); //should use ajax
+app.delete("/games/:id", function(req, res){
+  var games = getGames();
+  games[req.params.id] = undefined;
+  saveGames(games);
 })
 // your routes here
 
