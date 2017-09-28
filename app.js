@@ -48,12 +48,9 @@ app.get('/games/new', function(req,res) {
 
 //DETAILS
 app.get('/games/:id', function(req, res) {
-  //I could not figure this part out without the help of the complete file
-  console.log('im in get games/:id' + req.params.id);
   var game = getGames()[req.params.id];
   game.id = req.params.id;
   res.render('details-game', { game: game });
-
 });
 
 
@@ -74,13 +71,12 @@ app.post('/games', function(req,res) {
 app.get('/games/:id/edit', function(req,res) {
   var game = getGames()[req.params.id];
   game.id = req.params.id;
-  res.render('edit-game', {game: game});
+  res.render('edit-game', { game: game });
 });
 
 
-//PUT
+//UPDATE
 app.put('/games/:id', function(req,res) {
-  console.log("body:", req.body);
   var games = getGames();
   games[req.params.id] = req.body;
   saveGames(games);
@@ -90,10 +86,9 @@ app.put('/games/:id', function(req,res) {
 
 //DELETE
 app.delete('/games/:id', function(req,res) {
-  console.log("im in the route" + id);
   var games = getGames();
 // could not figure this out without looking at the complete file
-  //games[req.params.id] = undefined;
+  games[req.params.id] = undefined;
   saveGames(games);
   res.send(req.body);
 });
