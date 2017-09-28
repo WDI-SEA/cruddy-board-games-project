@@ -1,0 +1,11 @@
+<h1>"return an HTML form for editing a game"</h1>
+
+<div>
+  <form action="/games/<%= game.id %>" method="put" class="put-form">
+    <p>Name</p>
+    <input type="text" name="name" value="<%= game.name %>"/>
+    <p>Description</p>
+    <textarea name="description"><%= game.description %></textarea>
+    <button type="submit">Update</button>
+  </form>
+</div>
