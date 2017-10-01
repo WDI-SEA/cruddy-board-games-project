@@ -1,0 +1,17 @@
+<ul>
+  <% games.forEach(function(game, idx) { %>
+  <li><a href="/games/<%= game.name %>"><h2><%=game.name%></h2></a>
+  <a class="delete-game" href="/games" deleteUrl="/games/<%=game.name%>">Delete</a> 
+  <a class="edit-game" href="/games/<%=game.name%>/edit">Edit</a>  
+  </li>
+  <% }); %>
+</ul>
+
+
+
+
+
+  
+
+
+

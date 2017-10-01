@@ -1,0 +1,15 @@
+<h1>Edit Game</h1>
+
+<div>
+  <div>
+    <%=game.name%>
+  </div>
+
+  <textarea type="text" class="form-control" id="body" placeholder="Game description" name="description"><%=game.description%></textarea>
+
+
+  <a type="button" class="btn btn-primary" href="/games" editUrl="/games/<%=game.name%>">Submit</a>
+</div>
+
+
+
