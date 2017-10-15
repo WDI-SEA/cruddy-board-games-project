@@ -27,19 +27,18 @@ app.post('/games', function(req, res) {
 })
 
 app.get('/games/new', function(req, res) {
-	res.render('submitnew')
+	res.render('new')
 })
 
 
 app.get('/games/:id', function(req, res) {
-	var game = getGames();
+	var game = getGames()[req.params.id]
 	game.id = req.params.id;
 	res.render('show', {game: game})
 })
 
 app.get('/games/:id/edit', function(req, res) {
 	var game = getGames()[req.params.id];
-	game.id = req.params.id;
 	res.render('edit', {game: game})
 })
 

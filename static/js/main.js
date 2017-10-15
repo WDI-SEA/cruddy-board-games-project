@@ -11,7 +11,17 @@ console.log("JS good to go, sir!");
 
 // code here ...
 
-$('#newgame').on('click', function() {
-	alert("this is connected");
-});
-
+$('#edit').on('submit', function(e) {
+	e.preventDefault();
+	var form = $(this);
+	var url = form.attr('action');
+	var data = form.serialize();
+	$.ajax({
+		method: 'put',
+		url: url,
+		data: data
+	}).done(function(data) {
+		consol.log(data);
+	})
+	window.location = '/'
+})
