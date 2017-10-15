@@ -10,3 +10,8 @@ console.log("JS good to go, sir!");
 // to the appropriate URL
 
 // code here ...
+
+$('#newgame').on('click', function() {
+	alert("this is connected");
+});
+
