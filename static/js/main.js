@@ -1,12 +1,41 @@
 console.log("JS good to go, sir!");
 
+
+
 // listen for a "submit" event for the edit page. the edit form will live
 // at the path GET /games/:name/edit. Use AJAX to send a PUT request to the
 // appropriate URL
 
-// code here ...
+//PUT AJAX
+
+$('.put-form').on('submit', function(e) {
+  e.preventDefault();
+  var updateElement = $(this);
+  var updateUrl = updateElement.attr('action');
+  var updatedData = updateElement.serialize();
+  $.ajax({
+    method: 'PUT',
+    url: updateUrl,
+    data: updatedData
+  }).done(function(data) {
+
+      window.location = '/';
+  });
+});
 
 // listen for clicks on "delete" links. use AJAX to send a DELETE HTTP request
 // to the appropriate URL
 
-// code here ...
+//DELETE AJAX
+$('.delete').on('click', function(e) {
+  e.preventDefault();
+  var toDelete = $(this);
+  var deleteUrl = toDelete.attr('href');
+  $.ajax({
+    method: 'DELETE',
+    url: deleteUrl
+  }).done(function(data) {
+    
+    window.location = '/';
+  });
+});

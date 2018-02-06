@@ -1,0 +1,20 @@
+<div>
+  <h1>The Best Boardgames Ever... sorta.</h1>
+  <h4>Here is an editable list of some weird games that you should play.
+  </h4>
+  <h4>This was an exercise in using basic CRUD operations in routes.
+  </h4>
+</div>
+<div>
+  <ul>
+    <% for (var i = 0; i < games.length; i++) { %>
+      <% if (games[i]) { %>
+      <li>
+        <a href="/games/<%= i %>/edit">Edit</a>
+        <a href="/games/<%= i %>" class="delete">Delete</a>
+        <a href="/games/<%= i %>"><%= games[i].name %></a>
+      </li>
+      <% } %>
+    <% } %>
+  </ul>
+</div>
